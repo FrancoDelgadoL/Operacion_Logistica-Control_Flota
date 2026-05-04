@@ -1,11 +1,13 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 👇 IMPORTANTE PARA RENDER
+builder.WebHost.UseUrls("http://0.0.0.0:10000");
+
+// Add services
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -13,11 +15,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseStaticFiles();   // ✅ ESTA es la correcta
+app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
